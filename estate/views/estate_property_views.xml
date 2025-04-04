@@ -59,14 +59,14 @@
                                     <field name="state" />
                                 </group>
                             </page>
+                            <page string="Offers">
+                                <field name="offers_ids"/>
+                            </page>
                             <page string="Other info">
                                 <group>
                                     <field name="buyer_id" />
                                     <field name="salesperson_id" />
                                 </group>
-                            </page>
-                            <page string="Offers">
-                                <field name="price"/>
                             </page>
                         </notebook>
                     </sheet>
