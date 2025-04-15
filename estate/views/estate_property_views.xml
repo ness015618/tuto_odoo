@@ -30,15 +30,16 @@
             <form string="New Property">
                 <group>
                     <sheet>
-                        <button name="action_mark_as_sold" type="object" string="Sold" />
-                        <button name="action_cancel_property" type="object" string="Cancel"/>
+                        <field name="state" widget="statusbar" statusbar_visible="new,offer_received,offer_accepted,sold"/>
+                        <button name="action_mark_as_sold" type="object" string="Sold" invisible="state == 'sold' or state == 'cancelled'"/>
+                        <button name="action_cancel_property" type="object" string="Cancel" invisible="state == 'sold' or state == 'cancelled'"/>
                         <div class="oe_title">
                             <h1><field name="name" /></h1>
-                            <field name="tags_ids" widget="many2many_tags"/>
+                            <field name="tags_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                         </div>
                         <group>
                             <group>
-                                <field name="property_type_id" />
+                                <field name="property_type_id" options="{'no_create': true}"/>
                                 <field name="postcode" />
                                 <field name="date_availability" />
                             </group>
@@ -57,9 +58,8 @@
                                     <field name="facades" />
                                     <field name="garage" />
                                     <field name="garden" />
-                                    <field name="garden_area" />
-                                    <field name="garden_orientation" />
-                                    <field name="state" />
+                                    <field name="garden_area" invisible="not garden"/>
+                                    <field name="garden_orientation" invisible="not garden"/>
                                     <field name="total_area" />
                                 </group>
                             </page>
