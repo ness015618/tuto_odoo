@@ -21,6 +21,18 @@
         <field name="model">estate.property.type</field>
         <field name="arch" type="xml">
             <form string="New Property Type">
+                <field name="offer_count" invisible="1"/>
+
+                <div class="oe_button_box" name="button_box">
+                    <button name="%(estate_property_offer_action)d"
+                            type="action"
+                            class="oe_stat_button"
+                            icon="fa-tag"
+                            context="{'search_default_group_by_property_id': 1}">
+                        <field name="offer_count" widget="statinfo" string="Offers"/>
+                    </button>
+                </div>
+
                 <div class="oe_title">
                     <h1><field name="name" /></h1>
                 </div>
@@ -32,5 +44,4 @@
             </form>
         </field>
     </record>
-
 </odoo>

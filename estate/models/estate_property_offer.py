@@ -22,6 +22,8 @@ class EstatePropertyOffer(models.Model):
         ('check_offer_price','CHECK(price >= 0)', "An offer should be positive.")
     ]
 
+    property_type_id = fields.Many2one(related="property_id.property_type_id", store=True, string="Property Type")
+
     @api.depends("create_date","validity")
     def _compute_deadline(self):
         for record in self:
