@@ -2,6 +2,9 @@ from odoo import api,fields, models
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools.float_utils import float_compare
 from dateutil.relativedelta import relativedelta
+import logging
+
+_logger = logging.getLogger(__name__)
 
 class EstateProperty(models.Model):
     _name = "estate.property"
@@ -77,6 +80,7 @@ class EstateProperty(models.Model):
         return True
     
     def action_mark_as_sold(self):
+        _logger.warning("🚨 estate's action_mark_as_sold() CALLED")
         for record in self:
             if record.state == 'cancelled':
                 raise UserError("Canceled properties cannot be sold.")
@@ -90,3 +94,9 @@ class EstateProperty(models.Model):
             if record.selling_price:
                 if float_compare(record.selling_price, record.expected_price * 0.9, precision_digits=2) == -1 :
                     raise ValidationError("The selling price cannot be lower than 90 percent of the expected price.")
+    
+    @api.ondelete(at_uninstall=False)
+    def _check_state_delete(self):
+        for record in self:
+            if record.state != 'new' and record.state != 'cancelled':
+                raise ValidationError("Cannot delete a property with an offer or sold property.")

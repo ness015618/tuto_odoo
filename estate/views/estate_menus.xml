@@ -11,6 +11,7 @@
             </menuitem>
             <menuitem id="estate_property_tags" action="estate_property_tags_action" name="Property Tags">
             </menuitem>
+            <menuitem id="estate_property_users" action="estate_property_users_action" name="Users"></menuitem>
         </menuitem>
 
     </menuitem>
