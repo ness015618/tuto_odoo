@@ -2,7 +2,7 @@
     <record id="estate_property_action" model="ir.actions.act_window">
         <field name="name">Properties</field>
         <field name="res_model">estate.property</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">kanban,list,form</field>
         <field name="context">{'search_default_available_properties': 1}</field>
         <field name="search_view_id" ref="estate_property_search_view"/>
     </record>
@@ -102,6 +102,23 @@
                 <filter string="Group By Postcode" name="group_by_postcode" context="{'group_by':'postcode'}"/>
                 <filter string="Group By Property Types" name="group_by_property_types" context="{'group_by':'property_type_id'}" />
             </search>
+        </field>
+    </record>
+
+    <record id="estate_property_kanban_view" model="ir.ui.view">
+        <field name="name">estate.property.kanban.view</field>
+        <field name="model">estate.property</field>
+        <field name="priority" eval="1"/>
+        <field name="arch" type="xml">
+            <kanban>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div>
+                            <field name="name"></field>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
         </field>
     </record>
 </odoo>
